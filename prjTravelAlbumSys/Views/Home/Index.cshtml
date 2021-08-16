@@ -1,0 +1,63 @@
+﻿@model IEnumerable<prjTravelAlbumSys.Models.TAlbum>
+
+@{
+    ViewData["Title"] = "熱門評論";
+}
+
+<style>
+    .carousel-inner img {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+<div id="demo" class="carousel slide" data-ride="carousel">
+
+    <!-- Indicators -->
+    <ul class="carousel-indicators">
+        <li data-target="#demo" data-slide-to="0" class="active"></li>
+        <li data-target="#demo" data-slide-to="1"></li>
+        <li data-target="#demo" data-slide-to="2"></li>
+    </ul>
+
+    <!-- The slideshow -->
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="~/Images/img01.jpg" width="1100" height="500">
+        </div>
+        <div class="carousel-item">
+            <img src="~/Images/img02.jpg" width="1100" height="500">
+        </div>
+        <div class="carousel-item">
+            <img src="~/Images/img03.jpg" width="1100" height="500">
+        </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#demo" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
+</div>
+
+<h3 class="text-center mt-5">熱門評論</h3>
+<hr />
+
+<div class="row">
+    @foreach(var item in Model)
+    {
+        <div class="col-12 col-md-4 mb-2">
+            <div class="card" style="width: 100%;">
+                <img class="card-img-top" src="~/Album/@item.FAlbum" style="height: 240px;" />
+                <div class="card-body">
+                    <h5 class="card-title">@item.FTitle</h5>
+                    <p class="card-text text-secondary">@item.FReleaseTime</p>
+                    <p class="card-text text-secondary">評論數量: @item.FCommentNum</p>
+                    <a asp-action="CommentList" asp-route-AlbumId="@item.FAlbumId" class="btn btn-secondary">觀看評論</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

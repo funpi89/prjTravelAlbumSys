@@ -1,0 +1,78 @@
+﻿@using prjTravelAlbumSys.Models;
+@inject TravelAlbumDbContext _context;
+@{
+    var categories = _context.TCategories.ToList();
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"] - 雲端相簿平台</title>
+
+    <!--Bootstarp CSS-->
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-controller="Admin" asp-action="Index">雲端相簿平台</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+
+                        <!--加入分類-->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                相簿分類
+                            </a>
+                            <div class="dropdown-menu">
+                                @foreach (var item in categories)
+                                {
+                                    <a class="dropdown-item" asp-action="AlbumCategory" asp-route-Cid="@item.FCid">@item.FCname</a>
+                                }
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Admin" asp-action="Index">會員列表</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Logout">登出</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">@User.Identity.Name 您好</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container mt-3">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top text-muted ">
+        <div class="container mt-3">
+            &copy; @DateTime.Now.Year - 系統維護建置by <a href="#">David</a>
+        </div>
+    </footer>
+
+    <!--jQuery JS-->
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <!--Bootstarp JS-->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

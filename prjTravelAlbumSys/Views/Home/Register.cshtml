@@ -1,0 +1,48 @@
+﻿@model prjTravelAlbumSys.Models.TMember
+
+@{
+    ViewData["Title"] = "會員註冊";
+}
+
+
+<h4>會員註冊</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Register">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FUid" class="control-label"></label>
+                <input asp-for="FUid" class="form-control" />
+                <span asp-validation-for="FUid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FPwd" class="control-label"></label>
+                <input asp-for="FPwd" type="password" class="form-control" />
+                <span asp-validation-for="FPwd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FName" class="control-label"></label>
+                <input asp-for="FName" class="form-control" />
+                <span asp-validation-for="FName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FMail" class="control-label"></label>
+                <input asp-for="FMail" class="form-control" />
+                <span asp-validation-for="FMail" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="註冊" class="btn btn-secondary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <span class="text-danger">@ViewBag.Msg</span>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

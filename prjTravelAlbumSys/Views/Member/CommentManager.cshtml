@@ -1,0 +1,54 @@
+﻿@using prjTravelAlbumSys.Models;
+
+@model IEnumerable<prjTravelAlbumSys.Models.TComment>
+
+@{
+    ViewData["Title"] = "評論管理";
+    Layout = "~/Views/Shared/_MemberLayout.cshtml";
+    var album = ViewBag.Album as TAlbum;
+}
+
+<h4>評論管理</h4>
+<hr />
+
+<div class="row">
+    <div class="col-12 col-md-6">
+
+        <div class="card">
+            <img class="card-img-top" src="~/Album/@album.FAlbum" />
+            <div class="card-img-overlay">
+                <p class="text-white p-2" style="position:relative;margin-top:50%;background-color:rgb(129 109 109 / 0.58)">
+                    <strong>@album.FTitle</strong><br />
+                    <span>@album.FDescription</span><br />
+                    發佈時間：@album.FReleaseTime<br />
+                    評論數量：@album.FCommentNum
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-6">
+        <div style="overflow:auto;height:700px;">
+            @foreach (var item in Model)
+            {
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <h5 class="text-primary">@item.FName</h5>
+                        <p>@item.FComment</p>
+                        <p>@item.FReleaseTime</p>
+                        <p>
+                            <a asp-action="CommentDelete"
+                               asp-route-CommentId="@item.FCommentId"
+                               class="btn btn-danger" onclick="return confirm('確定刪除嗎');">刪除</a>
+                        </p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
+

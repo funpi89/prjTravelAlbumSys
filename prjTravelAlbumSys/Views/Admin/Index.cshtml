@@ -1,0 +1,57 @@
+﻿@model IEnumerable<prjTravelAlbumSys.Models.TMember>
+
+@{
+    ViewData["Title"] = "會員列表";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<h4>會員列表</h4>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FUid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FPwd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FMail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FRole)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @item.FUid
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FPwd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FMail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FRole)
+            </td>
+            <td>
+                <a asp-action="MemberAlbum" asp-route-Uid="@item.FUid">照片資料</a> |
+                <a asp-action="MemberDelete" asp-route-Uid="@item.FUid"
+                   onclick="return confirm('確定刪除嗎');">刪除</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

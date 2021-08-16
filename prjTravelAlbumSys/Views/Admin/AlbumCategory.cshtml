@@ -1,0 +1,31 @@
+﻿@model IEnumerable<prjTravelAlbumSys.Models.TAlbum>
+
+@{
+    ViewData["Title"] = "相簿分類";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h4>相簿分類-@ViewBag.CategoryName</h4>
+<hr />
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-12 col-md-4 mb-2">
+            <div class="card" style="width:100%;">
+                <img class="card-img-top" src="~/Album/@item.FAlbum" style="height: 240px;">
+                <div class="card-body">
+                    <h5 class="card-title">@item.FTitle</h5>
+                    <p class="card-text text-secondary">@item.FReleaseTime</p>
+                    <p class="card-text text-secondary">評論數量：@item.FCommentNum</p>
+                    <a asp-action="AlbumDelete" asp-route-AlbumId="@item.FAlbumId"
+                       class="btn btn-danger" onclick="return confirm('確定刪除嗎');">照片刪除</a>
+                    <a asp-action="CommentManager" asp-route-AlbumId="@item.FAlbumId"
+                       class="btn btn-light">評論管理</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
